@@ -10,8 +10,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  // sayHell() & getHi doesn't have to be same but encourage same name
   @Get('/hello')
   sayHello(): string {
-    return 'Hello everyone';
+    return this.appService.getHi();
   }
 }

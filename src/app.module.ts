@@ -7,4 +7,5 @@ import { AppService } from './app.service';
   controllers: [AppController], // take URl, and execute fn
   providers: [AppService],
 })
+// Everything must be in AppModule
 export class AppModule {}
