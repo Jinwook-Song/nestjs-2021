@@ -46,7 +46,32 @@ describe('MoviesService', () => {
     });
   });
 
-  it.todo('createMovie');
-  it.todo('deleteMovie');
+  describe('deleteMovie', () => {
+    it('deletes a movie', () => {
+      service.createMovie(testMovie);
+      const beforeDelete = service.getAllMovies().length;
+      service.deleteMovie(1);
+      const afterDelete = service.getAllMovies().length;
+      expect(afterDelete).toBeLessThan(beforeDelete);
+    });
+    it('should throw 404 error', () => {
+      try {
+        service.deleteMovie(999);
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual('Movie with ID 999 not found.');
+      }
+    });
+  });
+
+  describe('createMovie', () => {
+    it('should create a movie', () => {
+      const beforeCreate = service.getAllMovies().length;
+      service.createMovie(testMovie);
+      const afterCreate = service.getAllMovies().length;
+      expect(afterCreate).toBeGreaterThan(beforeCreate);
+    });
+  });
+
   it.todo('editMovie');
 });
