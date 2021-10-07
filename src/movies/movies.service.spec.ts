@@ -73,5 +73,19 @@ describe('MoviesService', () => {
     });
   });
 
-  it.todo('editMovie');
-});
+  describe('editMovie', () => {
+    it('should update a movie', () => {
+      service.createMovie(testMovie);
+      service.editMovie(1, { title: 'Updated Title' });
+      const movie = service.getOneMovie(1);
+      expect(movie.title).toEqual('Updated Title');
+    });
+    it('should throw 404 error', () => {
+      try {
+        service.editMovie(999, {});
+      } catch (error) {
+        expect(error).toBeInstanceOf(NotFoundException);
+        expect(error.message).toEqual('Movie with ID 999 not found.');
+      }
+  });
+}});
